@@ -1,0 +1,31 @@
+<aura:component access="global" controller="SimpleContentController" implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes">
+    <ltng:require styles="/resource/SimpleContentBox/css/bootstrap.css"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="content" type="SimpleContent__c"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="ui-widget simplecontentbootstrap center-block">
+    <aura:if isTrue="{!and(!empty(v.content.ContentLeft__c), !empty(v.content.ContentRight__c))}">
+        <div class="row clearfix">
+            <div class="col-md-6 pull-left">
+                <ui:outputRichText value="{!v.content.ContentLeft__c}"/>
+            </div>
+            <div class="col-md-6 pull-right">
+                <ui:outputRichText value="{!v.content.ContentRight__c}"/>
+            </div>
+        </div>
+        <aura:set attribute="else">
+            <div class="row clearfix">
+                <div class="pull-left">
+                    <ui:outputRichText value="{!v.content.ContentLeft__c}"/>
+                </div>
+                <div class="pull-right">
+                    <ui:outputRichText value="{!v.content.ContentRight__c}"/>
+                </div>
+            </div>
+        </aura:set>
+    </aura:if>
+    <aura:if isTrue="{!and(empty(v.content.ContentLeft__c), empty(v.content.ContentRight__c))}">
+        <div id="simplesearch_spinner" align="center" class="loading-spinner-container"><img id="loading-spinner" src="../resource/simplecontent/images/slds_spinner.gif" alt="Loading..." /></div>
+    </aura:if>
+  </div>
+</aura:component>
